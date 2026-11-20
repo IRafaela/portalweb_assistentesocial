@@ -1,41 +1,59 @@
 import Input from "../Componentes/Input";
 import Button from "../Componentes/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
+  const [error, setError] = useState("");
+
   const handleSubmit = (e: React.SubmitEvent) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
-    
+    if (!email || !password) {
+      setError("E-mail e senhas são obrigatórios");
+      return;
+    }
+
+    navigate("/dashboard");
   };
   return (
     <div className="flex h-screen w-full items-center justify-center bg-teal-100">
       <div className="flex w-[380px] max-w-sm flex-col gap-4 rounded-lg bg-teal-100 p-8 shadow-lg">
         <h1 className="w-full text-center text-xl font-bold text-slate-800">
-          Login
+          Portal web
         </h1>
 
-        <form onSubmit={handleSubmit} className="flex w-full flex-col items-center gap-3">
-          <Input 
-          type="email" 
-          placeholder="E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-full flex-col items-center gap-3"
+        >
+          <Input
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value)
+              if (error) setError("");
+            }}
           />
 
-          <Input 
-          type="password" 
-          placeholder="Senha" 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          <Input
+            type="password"
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (error) setError("");
+            }}
           />
+          {error && (
+            <p className="text-left text-sm font-bold text-black">{error}</p>
+          )}
 
-          <Button type="submit" title="Entrar" variant="outline" />
+          <Button type="submit" title="Entrar" variant="default" />
 
           <Link
             to="/esqueci-senha"

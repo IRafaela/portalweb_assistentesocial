@@ -8,9 +8,9 @@ type ButtonType = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 const Button = ({ title, variant = "default", ...props }: ButtonType) => {
   const buttonVariant = () => {
     if (variant === "default") {
-      return "w-full border-2 border-cyan-300 cursor-pointer rounded-md bg-teal-200 py-2 text-sm font-bold text-white";
+      return " cursor-pointer rounded-md bg-teal-200 px-6 py-2 ml-4 text-sm font-bold ";
     } else if (variant == "outline") {
-      return "w-full  cursor-pointer rounded-md bg-cyan-200 py-2 text-sm font-bold ";
+      return " cursor-pointer rounded-md bg-cyan-200 px-15 py-3 text-6 font-bold ";
     }
   };
   return (
